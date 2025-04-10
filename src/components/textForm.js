@@ -35,17 +35,21 @@ export default function TextForm(props) {
     setText(newText)
   };
 
-  const handleCopyText = ()=>{
-    navigator.clipboard.writeText(text)
+    const handleCopyText = ()=>{
+      navigator.clipboard.writeText(text)
     .then(()=>{
-      alert ("copy to clipboard")
-    })
+        alert ("copy to clipboard")
+      })
 
     .catch(error =>{
-      console.log("failed to copy",error)
-    })
-  };
+          console.log("failed to copy",error)
+        })
+    };
 
+    const handleExtraSpaces = () =>{
+      let newText = text.split(/[ ]+/);// this is called regex to remove extra spaces
+      setText(newText.join(" "))
+    }
 
   const handleChange = (event) =>{
    // console.log("On Change")
@@ -69,6 +73,7 @@ export default function TextForm(props) {
       <button className="btn btn-primary mx-3" onClick={handleClearClick}>Clear the text</button>
       <button className="btn btn-primary mx-3" onClick={handleCapitalizeCase}>Capitalize case </button>
       <button className="btn btn-primary mx-3" onClick={handleCopyText}>Copy the text </button>
+      <button className="btn btn-primary mx-3" onClick={handleExtraSpaces}>Remove extra spaces </button>
     </div>
 
     <div className="container">
