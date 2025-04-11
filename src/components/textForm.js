@@ -60,13 +60,13 @@ export default function TextForm(props) {
 
   return (
     <>
-    <div className='container'>
+    <div className='container' style={{color:props.mode==='dark'?'white':'black'}}>
     {/* ye heading mein app.js mein dunga jo chahe vo according to our topic.*/}
     <h1>{props.heading}</h1>
     {/* this className mb-3 is bootstrap class mean margin bottom 3 */}
       <div className="mb-3">
         <label htmlFor="myBox" className='form-label'>Give your textarea</label>
-        <textarea className='form-control' id='myBox' rows={5} value={text} onChange={handleChange}></textarea>
+        <textarea className='form-control' id='myBox' rows={5} value={text} onChange={handleChange} style={{backgroundColor:props.mode==='dark'?'gray':'white',color:props.mode==='dark'?'white':'black'}} ></textarea>
       </div>
       <button className="btn btn-primary mx-3" onClick={handleUpClick}>Convert to Uppercase</button>
       <button className="btn btn-primary mx-3" onClick={handledownClick}>Convert to lowercase</button>
@@ -76,11 +76,13 @@ export default function TextForm(props) {
       <button className="btn btn-primary mx-3" onClick={handleExtraSpaces}>Remove extra spaces </button>
     </div>
 
-    <div className="container">
+    <div className="container" style={{color:props.mode==='dark'?'white':'black'}}>
       <h1>Your text summary</h1>
       {/* split() splits a string into an array of substrings, and returns the array: How,are,you,doing,today? */}
       <p>{text.split(" ").length} words, {text.length} characters</p>
       <p> {0.25*text.split(" ").length} seconds to read</p> 
+      <h2>Preview</h2>
+      <p>{text.length>0?text:"Enter something in the textbox to preview here"}</p>
     </div>
     </>
   )
