@@ -6,6 +6,7 @@ State Hooks
 State lets a component “remember” information like user input. For example, a form component can use state to store the input value, while an image gallery component can use state to store the selected image index.
 */
 import React,{useState} from 'react'
+import showAlert from '../App.js'
 
 //start wala text hoga and update wala setText(aese hi mein [count,setCount],[index,setIndex] apne hisaab se rakh sakte hai)
 
@@ -17,28 +18,32 @@ export default function TextForm(props) {
     //console.log("UpperCase was Clicked:" + text)
     let newText = text.toUpperCase();
     setText(newText)
+    props.showAlert("converted to Uppercase","success")
   };
 
   const handledownClick = ()=>{
     let newText = text.toLowerCase();
     setText(newText)
+    props.showAlert("converted to LowerCase","success")
   };
 
   const handleClearClick = ()=>{
     let newText = '';
     setText(newText)
+    props.showAlert("text is cleared","success")
   };
 
   //slice(1) is a JavaScript string method that returns a portion of the string starting from index 1 to the end.
   const handleCapitalizeCase = () =>{
     let newText = text.split(" ").map(word =>word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(" ") 
     setText(newText)
+    props.showAlert("Text is Capitalized","success")
   };
 
     const handleCopyText = ()=>{
       navigator.clipboard.writeText(text)
     .then(()=>{
-        alert ("copy to clipboard")
+      props.showAlert("Text is copied","success")
       })
 
     .catch(error =>{
@@ -49,6 +54,7 @@ export default function TextForm(props) {
     const handleExtraSpaces = () =>{
       let newText = text.split(/[ ]+/);// this is called regex to remove extra spaces
       setText(newText.join(" "))
+      props.showAlert("Extra space is removed","success")
     }
 
   const handleChange = (event) =>{
@@ -56,6 +62,11 @@ export default function TextForm(props) {
     setText(event.target.value)//user jo bhi value de vo add ho jaye already written value mein mean ab input de sakte h new value text setText mein update hoti ja rahi hai
   };
 
+  /*text.trim() → removes leading/trailing spaces
+.split(/\s+/) → splits on any whitespace (spaces, tabs, newlines)
+.filter(word => word.length !== 0) → removes empty strings
+.length → counts actual words */
+  
   const [text, setText] = useState('');//is line ko function component ke andar rakhna hota hai
 
   return (
@@ -66,7 +77,8 @@ export default function TextForm(props) {
     {/* this className mb-3 is bootstrap class mean margin bottom 3 */}
       <div className="mb-3">
         <label htmlFor="myBox" className='form-label'>Give your textarea</label>
-        <textarea className='form-control' id='myBox' rows={5} value={text} onChange={handleChange} style={{backgroundColor:props.mode==='dark'?'gray':'white',color:props.mode==='dark'?'white':'black'}} ></textarea>
+        <textarea className='form-control' id='myBox' rows={5} value={text} onChange={handleChange} style={{backgroundColor: props.greenMode=== 'green'?'#d4efdf':props.mode==='dark'?'gray':'white',
+        color: props.greenMode=== 'green'?'#a2d9ce':props.mode==='dark'?'white':'black'}}></textarea>
       </div>
       <button className="btn btn-primary mx-3" onClick={handleUpClick}>Convert to Uppercase</button>
       <button className="btn btn-primary mx-3" onClick={handledownClick}>Convert to lowercase</button>
@@ -79,7 +91,7 @@ export default function TextForm(props) {
     <div className="container" style={{color:props.mode==='dark'?'white':'black'}}>
       <h1>Your text summary</h1>
       {/* split() splits a string into an array of substrings, and returns the array: How,are,you,doing,today? */}
-      <p>{text.split(" ").length} words, {text.length} characters</p>
+      <p>{text.trim().split(/\s+/).filter(word => word.length !== 0).length} words {text.replace(/\s/g, '').length} characters</p>
       <p> {0.25*text.split(" ").length} seconds to read</p> 
       <h2>Preview</h2>
       <p>{text.length>0?text:"Enter something in the textbox to preview here"}</p>

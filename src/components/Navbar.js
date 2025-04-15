@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 export default function Navbar(props) {
  
   return (
-    <nav className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}>
+    <nav className={`navbar navbar-expand-lg ${props.greenMode === 'green' ? 'bg-success' : `navbar-${props.mode} bg-${props.mode}`}`}>
     <div className="container-fluid">
       <a className="navbar-brand" href="/">{props.title}</a>
       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,10 +30,17 @@ export default function Navbar(props) {
           <button className="btn btn-outline-success" type="submit">Search</button>
         </form>
 
-        {/*here we take a switch from bootstrap*/}
+{/* to combine both switches i used checked = {props.mode === 'darkGreen'} ,,checked = {props.mode === 'dark'} so that when one is click to open another one is close automatically but its not all i also change onclick to onChange in both swithches bcz React recommends this for checkboxes/switches */}
+        {/*here we take a switch from bootstrap for dark mode*/}
             <div className={`form-check form-switch ms-5 text-${props.mode==='light'?'dark':'light'}`}>
-      <input className="form-check-input" type="checkbox" onClick={props.toggleMode} role="switch" id="switchCheckDefault"/>
-      <label className= "form-check-label" htmlFor="switchCheckDefault">{props.modeName}</label>
+      <input className="form-check-input" type="checkbox" onChange={props.toggleMode} role="switch" checked = {props.mode === 'dark'}id="switchCheckDefault-1"/>
+      <label className= "form-check-label" htmlFor="switchCheckDefault-1">{props.modeName}</label>
+    </div>
+            {/*here we take a switch from bootstrap for dark blue mode*/}
+            <div className={`form-check form-switch ms-5 text-${props.greenMode==='light'?'green':'light'}`}>
+      <input className="form-check-input" type="checkbox"
+      checked = {props.greenMode === 'green'} onChange={props.darkGreen} role="switch" id="switchCheckDefault-2"/>
+      <label className= "form-check-label" htmlFor="switchCheckDefault-2">{props.greenModeName}</label>
     </div>
 
       </div>
