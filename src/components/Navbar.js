@@ -1,14 +1,15 @@
 import React from 'react'
 //props ko use krne ke liye PropTypes ko import krna padta hai
 import PropTypes from 'prop-types'
-
+import { Link } from 'react-router-dom'
 
 export default function Navbar(props) {
  
   return (
     <nav className={`navbar navbar-expand-lg ${props.greenMode === 'green' ? 'bg-success' : `navbar-${props.mode} bg-${props.mode}`}`}>
     <div className="container-fluid">
-      <a className="navbar-brand" href="/">{props.title}</a>
+    {/* change anchor tag(a) to Link and href ki jagah to likho react router k liye ab jab is title pr click krenge to ye hame us page pr leke jayga jo hamne iske liye set kra hoga app.js mein iske liye filhal hamne Textform ko set kra hai*/}
+      <Link className="navbar-brand" to="/">{props.title}</Link>
       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -16,11 +17,11 @@ export default function Navbar(props) {
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
   
           <li className="nav-item">
-            <a className="nav-link active" aria-current="page" href="/">Home</a>
+            <Link className="nav-link active" aria-current="page" to="/">Home</Link>
           </li>
   
           <li className="nav-item">
-          <a href="/" className="nav-link active">{props.abouttext}</a>
+          <Link to="/About" className="nav-link active">{props.abouttext}</Link>
           </li>
           
           

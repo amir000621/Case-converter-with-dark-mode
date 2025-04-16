@@ -4,6 +4,8 @@ import './App.css';
 import Navbar from './components/Navbar';
 import TextForm from './components/textForm';
 import Alert from './components/Alert';
+import About from './components/About';
+import { BrowserRouter,Route,  Routes } from 'react-router-dom';
 
 //jo bhi kuchh ham is file mein likehnge vahi sab kuchh hame UI pr show hoga and is file ko ham index.js se connect krte hai
 /*{/* anything that we have return in curly braces are treat as js 
@@ -70,7 +72,8 @@ function App() {
    {/* yaha mene ek navbar componennt ko import kara and use is tarh kra ke jaha chaho use kro with different title mean ek hi nav ko kahi bhi usekro yaha mene tiitle ko aese rakha hai ke use change kr sake use krte waqt about ko bhi aese hi rakha hai */}
 
    {/*  mode = {mode} ye dono component ko props ke tarah pass kre kyuki dono jagha use hai and toggleMode = {toggleMode} ye sirf Navbar ko diya kyuki swith sirf wahi mojud hai kahi or nhi */}
-<Navbar title = "My-APP" abouttext = "About My App" mode = {mode} toggleMode = {toggleMode} darkGreen= {darkGreen} modeName = {mode==='light'? 'enable dark mode': 'disable dark mode'}
+   <BrowserRouter>
+<Navbar title = "My-APP" abouttext = "About" mode = {mode} toggleMode = {toggleMode} darkGreen= {darkGreen} modeName = {mode==='light'? 'enable dark mode': 'disable dark mode'}
 greenModeName = {greenMode ==='light'? 'enable dark Green mode': 'disable dark Green mode'}
 greenMode = {greenMode}
 />
@@ -78,9 +81,16 @@ greenMode = {greenMode}
 <Alert alert = {alert}/>
 {/* bootstrap ki class hoti hai container jise dene se ye textArea jara badhiya sa ho jayga apne aap */}
 <div className="container">
-<TextForm heading = "Enter the text to analyze" mode = {mode} showAlert = {showAlert} greenMode = {greenMode} />
 {/* <About mode = {mode} /> => ye about.js ko mene remove kr diya kyuki UI pr achha nhi lag raha tha */}
+<Routes>
+{/* hamne npm i se react router dom ko install kara uske baad ->import { BrowserRouter,Route,  Routes } from 'react-router-dom' 
+fr niche path set kara element ke andar component ko diya and that's it done 
+ */}
+  <Route exact path='/about' element = {<About mode = {mode}/>}></Route>
+  <Route exact path='/' element = {<TextForm heading = "Enter the text to analyze" mode = {mode} showAlert = {showAlert} greenMode = {greenMode} />}></Route>
+</Routes>
 </div>
+</BrowserRouter>
    </>
   );
 }
