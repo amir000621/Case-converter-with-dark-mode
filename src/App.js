@@ -72,7 +72,8 @@ function App() {
    {/* yaha mene ek navbar componennt ko import kara and use is tarh kra ke jaha chaho use kro with different title mean ek hi nav ko kahi bhi usekro yaha mene tiitle ko aese rakha hai ke use change kr sake use krte waqt about ko bhi aese hi rakha hai */}
 
    {/*  mode = {mode} ye dono component ko props ke tarah pass kre kyuki dono jagha use hai and toggleMode = {toggleMode} ye sirf Navbar ko diya kyuki swith sirf wahi mojud hai kahi or nhi */}
-   <BrowserRouter>
+   {/* i add-> basename="/my-react-app" bcz react dom need this to getting live*/}
+   <BrowserRouter basename="/Case-converter-with-dark-mode">
 <Navbar title = "My-APP" abouttext = "About" mode = {mode} toggleMode = {toggleMode} darkGreen= {darkGreen} modeName = {mode==='light'? 'enable dark mode': 'disable dark mode'}
 greenModeName = {greenMode ==='light'? 'enable dark Green mode': 'disable dark Green mode'}
 greenMode = {greenMode}
