@@ -73,9 +73,9 @@ function App() {
 
    {/*  mode = {mode} ye dono component ko props ke tarah pass kre kyuki dono jagha use hai and toggleMode = {toggleMode} ye sirf Navbar ko diya kyuki swith sirf wahi mojud hai kahi or nhi */}
    {/* i add-> basename="/my-react-app" bcz react dom need this to getting live*/}
-   <BrowserRouter basename="/Case-converter-with-dark-mode">
+   <BrowserRouter>
 <Navbar title = "My-APP" abouttext = "About" mode = {mode} toggleMode = {toggleMode} darkGreen= {darkGreen} modeName = {mode==='light'? 'enable dark mode': 'disable dark mode'}
-greenModeName = {greenMode ==='light'? 'enable dark Green mode': 'disable dark Green mode'}
+greenModeName = {greenMode ==='light'? 'enable Green mode': 'disable Green mode'}
 greenMode = {greenMode}
 />
 
@@ -88,7 +88,7 @@ greenMode = {greenMode}
 fr niche path set kara element ke andar component ko diya and that's it done 
  */}
   <Route exact path='/about' element = {<About mode = {mode}/>}></Route>
-  <Route exact path='/' element = {<TextForm heading = "Enter the text to analyze" mode = {mode} showAlert = {showAlert} greenMode = {greenMode} />}></Route>
+  <Route exact path='/' element = {<TextForm heading = "Text Editor - Word counter, Character counter, Remove extra spaces " mode = {mode} showAlert = {showAlert} greenMode = {greenMode} />}></Route>
 </Routes>
 </div>
 </BrowserRouter>

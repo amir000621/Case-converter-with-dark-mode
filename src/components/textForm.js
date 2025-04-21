@@ -6,7 +6,6 @@ State Hooks
 State lets a component “remember” information like user input. For example, a form component can use state to store the input value, while an image gallery component can use state to store the selected image index.
 */
 import React,{useState} from 'react'
-import showAlert from '../App.js'
 
 //start wala text hoga and update wala setText(aese hi mein [count,setCount],[index,setIndex] apne hisaab se rakh sakte hai)
 
@@ -44,6 +43,7 @@ export default function TextForm(props) {
       navigator.clipboard.writeText(text)
     .then(()=>{
       props.showAlert("Text is copied","success")
+      
       })
 
     .catch(error =>{
@@ -76,25 +76,28 @@ export default function TextForm(props) {
     <h1>{props.heading}</h1>
     {/* this className mb-3 is bootstrap class mean margin bottom 3 */}
       <div className="mb-3">
-        <label htmlFor="myBox" className='form-label'>Give your textarea</label>
-        <textarea className='form-control' id='myBox' rows={5} value={text} onChange={handleChange} style={{backgroundColor: props.greenMode=== 'green'?'#d4efdf':props.mode==='dark'?'gray':'white',
+        <label htmlFor="myBox" className='form-label'>First Enter your text to edit</label>
+        <textarea className='form-control' id='myBox' rows={5} value={text} onChange={handleChange} style={{backgroundColor: props.greenMode=== 'green'?'#d4efdf':props.mode==='dark'?'rgb(21 104 58)':'white',
         color: props.greenMode=== 'green'?'#a2d9ce':props.mode==='dark'?'white':'black'}}></textarea>
       </div>
-      <button className="btn btn-primary mx-3" onClick={handleUpClick}>Convert to Uppercase</button>
-      <button className="btn btn-primary mx-3" onClick={handledownClick}>Convert to lowercase</button>
-      <button className="btn btn-primary mx-3" onClick={handleClearClick}>Clear the text</button>
-      <button className="btn btn-primary mx-3" onClick={handleCapitalizeCase}>Capitalize case </button>
-      <button className="btn btn-primary mx-3" onClick={handleCopyText}>Copy the text </button>
-      <button className="btn btn-primary mx-3" onClick={handleExtraSpaces}>Remove extra spaces </button>
+      {/* i set a inbuild property calls disabled to disable the button when text.length = 0 */}
+      <button disabled = {text.length===0} className="btn btn-primary mx-3 my-1" onClick={handleUpClick}>Convert to Uppercase</button>
+      <button disabled = {text.length===0}  className="btn btn-primary mx-3 my-1" onClick={handledownClick}>Convert to lowercase</button>
+      <button disabled = {text.length===0}  className="btn btn-primary mx-3 my-1" onClick={handleClearClick}>Clear the text</button>
+      <button disabled = {text.length===0}  className="btn btn-primary mx-3 my-1" onClick={handleCapitalizeCase}>Capitalize case </button>
+      <button disabled = {text.length===0}  className="btn btn-primary mx-3 my-1" onClick={handleCopyText}>Copy the text </button>
+      <button disabled = {text.length===0}  className="btn btn-primary mx-3 my-1" onClick={handleExtraSpaces}>Remove extra spaces </button>
     </div>
 
     <div className="container" style={{color:props.mode==='dark'?'white':'black'}}>
       <h1>Your text summary</h1>
       {/* split() splits a string into an array of substrings, and returns the array: How,are,you,doing,today? */}
+      {/* filter method me hamne likha ke agar word ki length zero hai to vo yaha nhi rahega this is a higher order array method jo true hoga cahi yaha rahega verna nhi rahega */}
       <p>{text.trim().split(/\s+/).filter(word => word.length !== 0).length} words {text.replace(/\s/g, '').length} characters</p>
-      <p> {0.25*text.split(" ").length} seconds to read</p> 
+      {/* koi word na hote hue bhi time bata raha hai read krne ka ise hatane k liye yaah bhi uper wala filter method laga denge */}
+      <p> {0.25*text.split(" ").filter(word => word.length !== 0).length} seconds to read</p> 
       <h2>Preview</h2>
-      <p>{text.length>0?text:"Enter something in the textbox to preview here"}</p>
+      <p>{text.length>0?text:"Nothing to preview"}</p>
     </div>
     </>
   )

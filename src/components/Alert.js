@@ -6,9 +6,13 @@ export default function Alert(props) {
         const lower = word.toLowerCase();
         return lower.charAt(0).toUpperCase() + lower.slice(1);
     }
-  return ( props.alert &&  <div className={`alert alert-${props.alert.type} alert-dismissible fade show`}role="alert">
+  return ( 
+    // ye jo mera alertt tha ye aese ho raha tha ke screen ko hilata tha apni space banane k liye to ye achha ni lag raha tha isilye hamne iski ek height fix kri and uske andar ki js ko curly braces mein dala take vo js sahi se chale kyuki use mene kisi tag ke andar nhi dala(height dene ke baad ab achha lag raha hai kyuki ab alert ki space hamne bana di hai) 
+    <div style={{height:'50px'}}>
+    {props.alert &&  <div className={`alert alert-${props.alert.type} alert-dismissible fade show`}role="alert">
            <strong>{capitalize(props.alert.type)}</strong>:{props.alert.msg}
-        </div>  
+        </div> }
+    </div> 
   )
 }
 
